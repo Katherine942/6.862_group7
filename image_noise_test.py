@@ -12,4 +12,6 @@ noisy_img = random_noise(img , mode ='gaussian')
 cv2.imshow('image',noisy_img)
 cv2.waitKey()
 
+noisy_img = np.array(255 * noisy_img, dtype=np.uint8)
 cv2.imwrite('skimage_noisy.jpg',noisy_img)
+
