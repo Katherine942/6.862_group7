@@ -1,0 +1,317 @@
+21-04-11 19:09:00.677 :   task: dncnn
+  model: plain
+  gpu_ids: [0]
+  scale: 1
+  n_channels: 1
+  sigma: 25
+  sigma_test: 25
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: results
+    pretrained_netG: None
+    task: results/dncnn
+    log: results/dncnn
+    options: results/dncnn/options
+    models: results/dncnn/models
+    images: results/dncnn/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/dataroot_H
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7
+      dataroot_H: testsets/dataroot_H_5
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 40000
+    checkpoint_save: 80000
+    checkpoint_print: 10000
+  ]
+  opt_path: train_dncnn7.json
+  is_train: True
+
+21-04-11 19:09:00.678 : Random seed: 3653
+21-04-11 19:09:00.680 : Number of train images: 85, iters: 85
+21-04-11 19:09:05.664 : 
+Networks name: DnCNN
+Params number: 557057
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (3): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (12): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (15): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (18): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (21): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (24): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (27): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (30): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (33): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (36): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (39): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (42): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (45): BatchNorm2d(64, eps=0.0001, momentum=0.9, affine=True, track_running_stats=True)
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-04-11 19:09:05.693 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ |  0.000 | -0.073 |  0.079 |  0.025 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.0.bias
+ |  0.000 | -0.036 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.2.bias
+ |  0.516 |  0.104 |  0.946 |  0.251 | torch.Size([64]) || model.3.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.3.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.3.running_var
+ |  0.000 | -0.037 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.5.bias
+ |  0.614 |  0.115 |  0.948 |  0.240 | torch.Size([64]) || model.6.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.6.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.6.running_var
+ |  0.000 | -0.036 |  0.036 |  0.008 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.8.bias
+ |  0.524 |  0.115 |  0.987 |  0.267 | torch.Size([64]) || model.9.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.9.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.9.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.9.running_var
+ | -0.000 | -0.036 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.11.bias
+ |  0.492 |  0.103 |  0.987 |  0.262 | torch.Size([64]) || model.12.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.12.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.12.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.12.running_var
+ | -0.000 | -0.032 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.14.bias
+ |  0.580 |  0.113 |  1.000 |  0.288 | torch.Size([64]) || model.15.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.15.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.15.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.15.running_var
+ | -0.000 | -0.034 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.17.bias
+ |  0.561 |  0.138 |  0.991 |  0.258 | torch.Size([64]) || model.18.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.18.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.18.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.18.running_var
+ | -0.000 | -0.035 |  0.038 |  0.008 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.20.bias
+ |  0.544 |  0.109 |  0.998 |  0.256 | torch.Size([64]) || model.21.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.21.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.21.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.21.running_var
+ | -0.000 | -0.032 |  0.031 |  0.008 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.23.bias
+ |  0.540 |  0.106 |  0.974 |  0.249 | torch.Size([64]) || model.24.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.24.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.24.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.24.running_var
+ | -0.000 | -0.032 |  0.041 |  0.008 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.26.bias
+ |  0.532 |  0.104 |  0.987 |  0.270 | torch.Size([64]) || model.27.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.27.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.27.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.27.running_var
+ |  0.000 | -0.031 |  0.032 |  0.008 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.29.bias
+ |  0.516 |  0.108 |  0.967 |  0.257 | torch.Size([64]) || model.30.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.30.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.30.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.30.running_var
+ | -0.000 | -0.034 |  0.035 |  0.008 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.32.bias
+ |  0.543 |  0.124 |  0.962 |  0.250 | torch.Size([64]) || model.33.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.33.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.33.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.33.running_var
+ |  0.000 | -0.035 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.35.bias
+ |  0.628 |  0.126 |  0.992 |  0.266 | torch.Size([64]) || model.36.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.36.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.36.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.36.running_var
+ |  0.000 | -0.038 |  0.034 |  0.008 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.38.bias
+ |  0.528 |  0.101 |  0.957 |  0.278 | torch.Size([64]) || model.39.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.39.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.39.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.39.running_var
+ | -0.000 | -0.032 |  0.039 |  0.008 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.41.bias
+ |  0.547 |  0.100 |  0.993 |  0.265 | torch.Size([64]) || model.42.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.42.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.42.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.42.running_var
+ | -0.000 | -0.035 |  0.033 |  0.008 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.44.bias
+ |  0.563 |  0.134 |  0.993 |  0.246 | torch.Size([64]) || model.45.weight
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.45.bias
+ |  0.000 |  0.000 |  0.000 |  0.000 | torch.Size([64]) || model.45.running_mean
+ |  1.000 |  1.000 |  1.000 |  0.000 | torch.Size([64]) || model.45.running_var
+ | -0.000 | -0.023 |  0.022 |  0.008 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.000 |  0.000 |  0.000 |    nan | torch.Size([1]) || model.47.bias
+
+21-04-11 19:09:05.979 : ^_^ -----merging bnorm----- ^_^
+21-04-11 19:11:59.327 : <epoch:117, iter:  10,000, lr:3.125e-06> G_loss: 3.115e-02 
+21-04-11 19:14:52.290 : <epoch:235, iter:  20,000, lr:3.125e-06> G_loss: 3.482e-02 
+21-04-11 19:17:43.788 : <epoch:352, iter:  30,000, lr:3.125e-06> G_loss: 3.151e-02 
+21-04-11 19:20:38.421 : <epoch:470, iter:  40,000, lr:3.125e-06> G_loss: 4.300e-02 
+21-04-11 19:20:39.614 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 25.63dB
+21-04-11 19:20:39.615 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 177.72MSE
+21-04-11 19:20:39.615 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 13.33RMSE
+21-04-11 19:20:40.644 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 26.00dB
+21-04-11 19:20:40.644 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 163.52MSE
+21-04-11 19:20:40.645 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 12.79RMSE
+21-04-11 19:20:41.721 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 25.91dB
+21-04-11 19:20:41.722 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 166.64MSE
+21-04-11 19:20:41.722 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 12.91RMSE
+21-04-11 19:20:42.769 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 25.75dB
+21-04-11 19:20:42.769 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 173.10MSE
+21-04-11 19:20:42.770 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 13.16RMSE
+21-04-11 19:20:43.860 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 25.33dB
+21-04-11 19:20:43.860 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 190.61MSE
+21-04-11 19:20:43.861 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 13.81RMSE
+21-04-11 19:20:44.910 : ---6--> IXI500-Guys-1017-T1.nii.png | 25.63dB
+21-04-11 19:20:44.910 : ---6--> IXI500-Guys-1017-T1.nii.png | 177.72MSE
+21-04-11 19:20:44.911 : ---6--> IXI500-Guys-1017-T1.nii.png | 13.33RMSE
+21-04-11 19:20:46.034 : ---7--> IXI501-Guys-1016-T1.nii.png | 26.00dB
+21-04-11 19:20:46.035 : ---7--> IXI501-Guys-1016-T1.nii.png | 163.52MSE
+21-04-11 19:20:46.035 : ---7--> IXI501-Guys-1016-T1.nii.png | 12.79RMSE
+21-04-11 19:20:47.068 : ---8--> IXI502-Guys-1020-T1.nii.png | 25.91dB
+21-04-11 19:20:47.068 : ---8--> IXI502-Guys-1020-T1.nii.png | 166.64MSE
+21-04-11 19:20:47.069 : ---8--> IXI502-Guys-1020-T1.nii.png | 12.91RMSE
+21-04-11 19:20:48.160 : ---9--> IXI503-Guys-1021-T1.nii.png | 25.75dB
+21-04-11 19:20:48.161 : ---9--> IXI503-Guys-1021-T1.nii.png | 173.10MSE
+21-04-11 19:20:48.161 : ---9--> IXI503-Guys-1021-T1.nii.png | 13.16RMSE
+21-04-11 19:20:49.256 : --10--> IXI504-Guys-1025-T1.nii.png | 25.33dB
+21-04-11 19:20:49.257 : --10--> IXI504-Guys-1025-T1.nii.png | 190.61MSE
+21-04-11 19:20:49.257 : --10--> IXI504-Guys-1025-T1.nii.png | 13.81RMSE
+21-04-11 19:20:49.276 : <epoch:470, iter:  40,000, Average PSNR : 25.72dB
+
+21-04-11 19:20:49.276 : <epoch:470, iter:  40,000, Average MSE : 174.32dB
+
+21-04-11 19:20:49.277 : <epoch:470, iter:  40,000, Average RMSE : 13.20dB
+
+21-04-11 19:23:43.975 : <epoch:588, iter:  50,000, lr:3.125e-06> G_loss: 2.339e-02 
+21-04-11 19:26:36.698 : <epoch:705, iter:  60,000, lr:3.125e-06> G_loss: 2.052e-02 
+21-04-11 19:29:28.348 : <epoch:823, iter:  70,000, lr:3.125e-06> G_loss: 4.009e-02 
+21-04-11 19:32:22.288 : <epoch:941, iter:  80,000, lr:3.125e-06> G_loss: 2.852e-02 
+21-04-11 19:32:22.288 : Saving the model.
+21-04-11 19:32:23.517 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 26.42dB
+21-04-11 19:32:23.518 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 148.31MSE
+21-04-11 19:32:23.519 : ---1--> IXI500-Guys-1017-T1.nii-checkpoint.png | 12.18RMSE
+21-04-11 19:32:24.617 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 27.03dB
+21-04-11 19:32:24.618 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 128.79MSE
+21-04-11 19:32:24.618 : ---2--> IXI501-Guys-1016-T1.nii-checkpoint.png | 11.35RMSE
+21-04-11 19:32:25.716 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 26.90dB
+21-04-11 19:32:25.716 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 132.75MSE
+21-04-11 19:32:25.717 : ---3--> IXI502-Guys-1020-T1.nii-checkpoint.png | 11.52RMSE
+21-04-11 19:32:26.836 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 26.54dB
+21-04-11 19:32:26.837 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 144.36MSE
+21-04-11 19:32:26.838 : ---4--> IXI503-Guys-1021-T1.nii-checkpoint.png | 12.02RMSE
+21-04-11 19:32:27.952 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 25.93dB
+21-04-11 19:32:27.953 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 166.00MSE
+21-04-11 19:32:27.953 : ---5--> IXI504-Guys-1025-T1.nii-checkpoint.png | 12.88RMSE
+21-04-11 19:32:29.049 : ---6--> IXI500-Guys-1017-T1.nii.png | 26.42dB
+21-04-11 19:32:29.049 : ---6--> IXI500-Guys-1017-T1.nii.png | 148.31MSE
+21-04-11 19:32:29.050 : ---6--> IXI500-Guys-1017-T1.nii.png | 12.18RMSE
+21-04-11 19:32:30.143 : ---7--> IXI501-Guys-1016-T1.nii.png | 27.03dB
+21-04-11 19:32:30.144 : ---7--> IXI501-Guys-1016-T1.nii.png | 128.79MSE
+21-04-11 19:32:30.144 : ---7--> IXI501-Guys-1016-T1.nii.png | 11.35RMSE
+21-04-11 19:32:31.242 : ---8--> IXI502-Guys-1020-T1.nii.png | 26.90dB
+21-04-11 19:32:31.243 : ---8--> IXI502-Guys-1020-T1.nii.png | 132.75MSE
+21-04-11 19:32:31.243 : ---8--> IXI502-Guys-1020-T1.nii.png | 11.52RMSE
+21-04-11 19:32:32.328 : ---9--> IXI503-Guys-1021-T1.nii.png | 26.54dB
+21-04-11 19:32:32.329 : ---9--> IXI503-Guys-1021-T1.nii.png | 144.36MSE
+21-04-11 19:32:32.330 : ---9--> IXI503-Guys-1021-T1.nii.png | 12.02RMSE
+21-04-11 19:32:33.415 : --10--> IXI504-Guys-1025-T1.nii.png | 25.93dB
+21-04-11 19:32:33.415 : --10--> IXI504-Guys-1025-T1.nii.png | 166.00MSE
+21-04-11 19:32:33.416 : --10--> IXI504-Guys-1025-T1.nii.png | 12.88RMSE
+21-04-11 19:32:33.434 : <epoch:941, iter:  80,000, Average PSNR : 26.56dB
+
+21-04-11 19:32:33.435 : <epoch:941, iter:  80,000, Average MSE : 144.04dB
+
+21-04-11 19:32:33.435 : <epoch:941, iter:  80,000, Average RMSE : 11.99dB
+
+21-04-11 19:33:59.115 : Saving the final model.
+21-04-11 19:33:59.124 : End of training.
