@@ -146,8 +146,8 @@ def main(json_path='train_dncnn7.json'):
     # Step--4 (main training)
     # ----------------------------------------
     '''
-
-    for epoch in range(1000):  # keep running
+    epoch_range = opt['epoch_range']
+    for epoch in range(epoch_range):  # keep running
         for i, train_data in enumerate(train_loader):
 
             current_step += 1
@@ -198,30 +198,30 @@ def main(json_path='train_dncnn7.json'):
             # -------------------------------
             # 6) testing
             # -------------------------------
-            if current_step == 480001:
-                idx = 0
+#             if current_step == 480001:
+#                 idx = 0
 
-                for test_data in test_loader:
-                    idx += 1
-                    image_name_ext = os.path.basename(test_data['L_path'][0])
-                    img_name, ext = os.path.splitext(image_name_ext)
+#                 for test_data in test_loader:
+#                     idx += 1
+#                     image_name_ext = os.path.basename(test_data['L_path'][0])
+#                     img_name, ext = os.path.splitext(image_name_ext)
 
-                    img_dir = os.path.join(opt['path']['images'], img_name)
-                    util.mkdir(img_dir)
+#                     img_dir = os.path.join(opt['path']['images'], img_name)
+#                     util.mkdir(img_dir)
 
-                    model.feed_data(test_data)
-                    model.test()
+#                     model.feed_data(test_data)
+#                     model.test()
 
-                    visuals = model.current_visuals()
-                    E_img = util.tensor2uint(visuals['E'])
-                    H_img = util.tensor2uint(visuals['H'])
+#                     visuals = model.current_visuals()
+#                     E_img = util.tensor2uint(visuals['E'])
+#                     H_img = util.tensor2uint(visuals['H'])
 
-                    # -----------------------
-                    # save estimated image E
-                    # -----------------------
-                    save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
+#                     # -----------------------
+#                     # save estimated image E
+#                     # -----------------------
+#                     save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
                     
-                    util.imsave(E_img, save_img_path)
+#                     util.imsave(E_img, save_img_path)
 
             if current_step % opt['train']['checkpoint_test'] == 0:
 
@@ -250,7 +250,7 @@ def main(json_path='train_dncnn7.json'):
                     # save estimated image E
                     # -----------------------
                     save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
-                    if current_step == 1000*480:
+                    if current_step == epoch_range*1000:
                         util.imsave(E_img, save_img_path)
 
                     # -----------------------
@@ -284,30 +284,30 @@ def main(json_path='train_dncnn7.json'):
                 #########################################
                 ####   Saving the last testing images 
                 #########################################
-                if current_step == 480000:
-                idx = 0
+#             if current_step == 1000001:
+#                 idx = 0
 
-                for test_data in test_loader:
-                    idx += 1
-                    image_name_ext = os.path.basename(test_data['L_path'][0])
-                    img_name, ext = os.path.splitext(image_name_ext)
+#                 for test_data in test_loader:
+#                     idx += 1
+#                     image_name_ext = os.path.basename(test_data['L_path'][0])
+#                     img_name, ext = os.path.splitext(image_name_ext)
 
-                    img_dir = os.path.join(opt['path']['images'], img_name)
-                    util.mkdir(img_dir)
+#                     img_dir = os.path.join(opt['path']['images'], img_name)
+#                     util.mkdir(img_dir)
 
-                    model.feed_data(test_data)
-                    model.test()
+#                     model.feed_data(test_data)
+#                     model.test()
 
-                    visuals = model.current_visuals()
-                    E_img = util.tensor2uint(visuals['E'])
-                    H_img = util.tensor2uint(visuals['H'])
+#                     visuals = model.current_visuals()
+#                     E_img = util.tensor2uint(visuals['E'])
+#                     H_img = util.tensor2uint(visuals['H'])
 
-                    # -----------------------
-                    # save estimated image E
-                    # -----------------------
-                    save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
+#                     # -----------------------
+#                     # save estimated image E
+#                     # -----------------------
+#                     save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
                     
-                    util.imsave(E_img, save_img_path)
+#                     util.imsave(E_img, save_img_path)
 
                 # testing log
                 logger.info('<epoch:{:3d}, iter:{:8,d}, Average PSNR : {:<.2f}dB\n'.format(epoch, current_step, avg_psnr))
@@ -322,4 +322,18 @@ def main(json_path='train_dncnn7.json'):
 
 
 if __name__ == '__main__':
-    main()
+#     #### First run: to study sensiivity of SNR:
+#     snr_values = list(range(5,31,5))
+#     print('running snr of: ', snr_values)
+#     for snr in snr_values:
+#         json_pth = 'json/train_dncnn7_snr'+str(snr)+'.json'
+#         main(json_path=json_pth)
+
+    ### Second run: run with best SNR and large number of epoch with checkpoints
+    snr_values = [15]
+    print('running snr of: ', snr_values)
+    for snr in snr_values:
+        json_pth = 'json/train_dncnn7_epoch1000_snr15.json'
+        main(json_path=json_pth)
+
+
