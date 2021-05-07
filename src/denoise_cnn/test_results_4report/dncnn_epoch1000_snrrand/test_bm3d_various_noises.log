@@ -1,0 +1,1440 @@
+21-05-07 21:55:45.306 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:55:45.307 : Random seed: 68
+21-05-07 21:55:45.339 : testing dataset type: dncnn7
+21-05-07 21:55:45.363 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:56:21.207 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:56:21.674 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:56:22.087 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:56:26.252 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 31.56dB
+21-05-07 21:56:26.253 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 45.36MSE
+21-05-07 21:56:26.253 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 6.73RMSE
+21-05-07 21:56:26.254 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 215.00BM3D-MSE
+21-05-07 21:56:26.254 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 14.66BM3D-RMSE
+21-05-07 21:56:26.255 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 24.81dB - BM3D
+21-05-07 21:56:26.273 : Average PSNR : 31.56dB
+
+21-05-07 21:56:26.273 : Average MSE : 45.36
+
+21-05-07 21:56:26.274 : Average RMSE : 6.73
+
+21-05-07 21:56:26.274 : Average PSNR - BM3D : 24.81dB
+
+21-05-07 21:56:26.274 : Average MSE - BM3D : 215.00
+
+21-05-07 21:56:26.274 : Average RMSE - BM3D: 14.66
+
+21-05-07 21:56:26.274 : End of testing
+21-05-07 21:56:26.276 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_rand
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:56:26.277 : Random seed: 8205
+21-05-07 21:56:26.277 : testing dataset type: dncnn7_rand
+21-05-07 21:56:26.282 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:56:26.474 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:56:26.479 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:56:26.496 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:56:29.842 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 29.40dB
+21-05-07 21:56:29.843 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 74.67MSE
+21-05-07 21:56:29.844 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 8.64RMSE
+21-05-07 21:56:29.844 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 497.29BM3D-MSE
+21-05-07 21:56:29.845 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 22.30BM3D-RMSE
+21-05-07 21:56:29.846 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 21.16dB - BM3D
+21-05-07 21:56:29.864 : Average PSNR : 29.40dB
+
+21-05-07 21:56:29.864 : Average MSE : 74.67
+
+21-05-07 21:56:29.865 : Average RMSE : 8.64
+
+21-05-07 21:56:29.865 : Average PSNR - BM3D : 21.16dB
+
+21-05-07 21:56:29.865 : Average MSE - BM3D : 497.29
+
+21-05-07 21:56:29.865 : Average RMSE - BM3D: 22.30
+
+21-05-07 21:56:29.865 : End of testing
+21-05-07 21:56:29.868 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_rand_rayleigh
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:56:29.868 : Random seed: 5855
+21-05-07 21:56:29.868 : testing dataset type: dncnn7_rand_rayleigh
+21-05-07 21:56:29.873 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:56:29.952 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:56:29.957 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:56:29.974 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:56:33.468 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 24.68dB
+21-05-07 21:56:33.468 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 221.56MSE
+21-05-07 21:56:33.469 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 14.89RMSE
+21-05-07 21:56:33.470 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 392.40BM3D-MSE
+21-05-07 21:56:33.470 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 19.81BM3D-RMSE
+21-05-07 21:56:33.470 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 22.19dB - BM3D
+21-05-07 21:56:33.489 : Average PSNR : 24.68dB
+
+21-05-07 21:56:33.489 : Average MSE : 221.56
+
+21-05-07 21:56:33.489 : Average RMSE : 14.89
+
+21-05-07 21:56:33.489 : Average PSNR - BM3D : 22.19dB
+
+21-05-07 21:56:33.489 : Average MSE - BM3D : 392.40
+
+21-05-07 21:56:33.489 : Average RMSE - BM3D: 19.81
+
+21-05-07 21:56:33.490 : End of testing
+21-05-07 21:56:33.492 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_gaussian
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:56:33.492 : Random seed: 4458
+21-05-07 21:56:33.493 : testing dataset type: dncnn7_gaussian
+21-05-07 21:56:33.497 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:56:33.547 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:56:33.552 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:56:33.569 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:56:37.049 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 25.05dB
+21-05-07 21:56:37.050 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 203.10MSE
+21-05-07 21:56:37.051 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 14.25RMSE
+21-05-07 21:56:37.051 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 377.09BM3D-MSE
+21-05-07 21:56:37.052 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 19.42BM3D-RMSE
+21-05-07 21:56:37.053 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 22.37dB - BM3D
+21-05-07 21:56:37.071 : Average PSNR : 25.05dB
+
+21-05-07 21:56:37.071 : Average MSE : 203.10
+
+21-05-07 21:56:37.071 : Average RMSE : 14.25
+
+21-05-07 21:56:37.072 : Average PSNR - BM3D : 22.37dB
+
+21-05-07 21:56:37.072 : Average MSE - BM3D : 377.09
+
+21-05-07 21:56:37.072 : Average RMSE - BM3D: 19.42
+
+21-05-07 21:56:37.072 : End of testing
+21-05-07 21:59:28.700 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:59:28.701 : Random seed: 2635
+21-05-07 21:59:28.702 : testing dataset type: dncnn7
+21-05-07 21:59:28.707 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:59:33.204 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:59:33.209 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:59:33.226 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:59:37.268 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 31.56dB
+21-05-07 21:59:37.269 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 45.36MSE
+21-05-07 21:59:37.270 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 6.73RMSE
+21-05-07 21:59:37.270 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 214.21BM3D-MSE
+21-05-07 21:59:37.271 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 14.64BM3D-RMSE
+21-05-07 21:59:37.271 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 24.82dB - BM3D
+21-05-07 21:59:37.289 : Average PSNR : 31.56dB
+
+21-05-07 21:59:37.289 : Average MSE : 45.36
+
+21-05-07 21:59:37.289 : Average RMSE : 6.73
+
+21-05-07 21:59:37.289 : Average PSNR - BM3D : 24.82dB
+
+21-05-07 21:59:37.290 : Average MSE - BM3D : 214.21
+
+21-05-07 21:59:37.290 : Average RMSE - BM3D: 14.64
+
+21-05-07 21:59:37.290 : End of testing
+21-05-07 21:59:37.292 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_rand
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:59:37.293 : Random seed: 6846
+21-05-07 21:59:37.293 : testing dataset type: dncnn7_rand
+21-05-07 21:59:37.298 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:59:37.340 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:59:37.345 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:59:37.361 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:59:40.726 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 31.21dB
+21-05-07 21:59:40.727 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 49.18MSE
+21-05-07 21:59:40.727 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 7.01RMSE
+21-05-07 21:59:40.728 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 255.71BM3D-MSE
+21-05-07 21:59:40.728 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 15.99BM3D-RMSE
+21-05-07 21:59:40.729 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 24.05dB - BM3D
+21-05-07 21:59:40.747 : Average PSNR : 31.21dB
+
+21-05-07 21:59:40.747 : Average MSE : 49.18
+
+21-05-07 21:59:40.748 : Average RMSE : 7.01
+
+21-05-07 21:59:40.748 : Average PSNR - BM3D : 24.05dB
+
+21-05-07 21:59:40.748 : Average MSE - BM3D : 255.71
+
+21-05-07 21:59:40.748 : Average RMSE - BM3D: 15.99
+
+21-05-07 21:59:40.748 : End of testing
+21-05-07 21:59:40.751 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_rand_rayleigh
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:59:40.751 : Random seed: 1447
+21-05-07 21:59:40.751 : testing dataset type: dncnn7_rand_rayleigh
+21-05-07 21:59:40.756 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:59:40.798 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:59:40.803 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:59:40.819 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:59:44.246 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 20.86dB
+21-05-07 21:59:44.247 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 533.14MSE
+21-05-07 21:59:44.248 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 23.09RMSE
+21-05-07 21:59:44.248 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 954.47BM3D-MSE
+21-05-07 21:59:44.249 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 30.89BM3D-RMSE
+21-05-07 21:59:44.249 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 18.33dB - BM3D
+21-05-07 21:59:44.268 : Average PSNR : 20.86dB
+
+21-05-07 21:59:44.268 : Average MSE : 533.14
+
+21-05-07 21:59:44.268 : Average RMSE : 23.09
+
+21-05-07 21:59:44.268 : Average PSNR - BM3D : 18.33dB
+
+21-05-07 21:59:44.269 : Average MSE - BM3D : 954.47
+
+21-05-07 21:59:44.269 : Average RMSE - BM3D: 30.89
+
+21-05-07 21:59:44.269 : End of testing
+21-05-07 21:59:44.271 :   task: dncnn_epoch1000_snrrand
+  model: plain
+  gpu_ids: [0]
+  epoch_range: 1000
+  scale: 1
+  n_channels: 1
+  sigma: 15
+  sigma_test: 15
+  merge_bn: True
+  merge_bn_startpoint: 4
+  path:[
+    root: test_results_4report
+    pretrained_netG: results/dncnn_epoch1000_snrrand/models/latest_G.pth
+    log: test_results_4report/dncnn_epoch1000_snrrand
+    task: test_results_4report/dncnn_epoch1000_snrrand
+    options: test_results_4report/dncnn_epoch1000_snrrand/options
+    models: test_results_4report/dncnn_epoch1000_snrrand/models
+    images: test_results_4report/dncnn_epoch1000_snrrand/images
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: dncnn7
+      dataroot_H: trainsets/train_1000_img
+      dataroot_L: None
+      H_size: 40
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 1
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: dncnn7_gaussian
+      dataroot_H: testsets/test_380_plus10
+      dataroot_L: None
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: dncnn
+    in_nc: 1
+    out_nc: 1
+    nc: 64
+    nb: 17
+    gc: 32
+    ng: 2
+    reduction: 16
+    act_mode: BR
+    upsample_mode: convtranspose
+    downsample_mode: strideconv
+    init_type: orthogonal
+    init_bn_type: uniform
+    init_gain: 0.2
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: l1
+    G_lossfn_weight: 1.0
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0001
+    G_optimizer_clipgrad: None
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [200, 400, 600, 800, 1000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    checkpoint_test: 100000
+    checkpoint_save: 100000
+    checkpoint_print: 2000
+  ]
+  opt_path: json/train_dncnn7_epoch1000_snrrand.json
+  is_train: True
+
+21-05-07 21:59:44.272 : Random seed: 7079
+21-05-07 21:59:44.272 : testing dataset type: dncnn7_gaussian
+21-05-07 21:59:44.277 : Number of train images: 1,002, iters: 1,002
+21-05-07 21:59:44.317 : ^_^ -----merging bnorm----- ^_^
+21-05-07 21:59:44.322 : 
+Networks name: DnCNN
+Params number: 555137
+Net structure:
+DnCNN(
+  (model): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU(inplace=True)
+    (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (16): ReLU(inplace=True)
+    (17): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (19): ReLU(inplace=True)
+    (20): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (28): ReLU(inplace=True)
+    (29): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (31): ReLU(inplace=True)
+    (32): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (34): ReLU(inplace=True)
+    (35): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (37): ReLU(inplace=True)
+    (38): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (40): ReLU(inplace=True)
+    (41): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (43): ReLU(inplace=True)
+    (44): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (46): ReLU(inplace=True)
+    (47): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+)
+
+21-05-07 21:59:44.338 : 
+ |  mean  |  min   |  max   |  std   || shape               
+ | -0.000 | -0.123 |  0.068 |  0.024 | torch.Size([64, 1, 3, 3]) || model.0.weight
+ |  0.000 | -0.010 |  0.006 |  0.003 | torch.Size([64]) || model.0.bias
+ |  0.003 | -2.440 |  1.998 |  0.324 | torch.Size([64, 64, 3, 3]) || model.2.weight
+ | -0.003 | -0.173 |  0.077 |  0.041 | torch.Size([64]) || model.2.bias
+ |  0.002 | -1.934 |  1.887 |  0.307 | torch.Size([64, 64, 3, 3]) || model.5.weight
+ |  0.039 | -0.533 |  0.348 |  0.157 | torch.Size([64]) || model.5.bias
+ |  0.002 | -1.123 |  1.132 |  0.148 | torch.Size([64, 64, 3, 3]) || model.8.weight
+ | -0.000 | -1.170 |  1.676 |  0.466 | torch.Size([64]) || model.8.bias
+ |  0.001 | -0.431 |  0.404 |  0.077 | torch.Size([64, 64, 3, 3]) || model.11.weight
+ |  0.036 | -1.091 |  1.183 |  0.423 | torch.Size([64]) || model.11.bias
+ | -0.000 | -0.493 |  0.469 |  0.073 | torch.Size([64, 64, 3, 3]) || model.14.weight
+ |  0.057 | -0.584 |  0.814 |  0.297 | torch.Size([64]) || model.14.bias
+ |  0.000 | -0.424 |  0.413 |  0.071 | torch.Size([64, 64, 3, 3]) || model.17.weight
+ |  0.057 | -1.109 |  0.746 |  0.323 | torch.Size([64]) || model.17.bias
+ |  0.000 | -0.415 |  0.412 |  0.070 | torch.Size([64, 64, 3, 3]) || model.20.weight
+ | -0.002 | -0.592 |  0.938 |  0.323 | torch.Size([64]) || model.20.bias
+ |  0.000 | -0.396 |  0.395 |  0.073 | torch.Size([64, 64, 3, 3]) || model.23.weight
+ | -0.036 | -1.025 |  0.771 |  0.380 | torch.Size([64]) || model.23.bias
+ | -0.000 | -0.396 |  0.476 |  0.059 | torch.Size([64, 64, 3, 3]) || model.26.weight
+ |  0.044 | -0.857 |  1.217 |  0.362 | torch.Size([64]) || model.26.bias
+ |  0.000 | -0.506 |  0.478 |  0.077 | torch.Size([64, 64, 3, 3]) || model.29.weight
+ |  0.002 | -0.916 |  1.189 |  0.361 | torch.Size([64]) || model.29.bias
+ |  0.001 | -0.348 |  0.375 |  0.066 | torch.Size([64, 64, 3, 3]) || model.32.weight
+ |  0.038 | -0.623 |  1.002 |  0.306 | torch.Size([64]) || model.32.bias
+ |  0.001 | -0.455 |  0.410 |  0.078 | torch.Size([64, 64, 3, 3]) || model.35.weight
+ |  0.019 | -0.866 |  0.971 |  0.370 | torch.Size([64]) || model.35.bias
+ | -0.000 | -0.420 |  0.361 |  0.065 | torch.Size([64, 64, 3, 3]) || model.38.weight
+ | -0.016 | -0.704 |  1.154 |  0.334 | torch.Size([64]) || model.38.bias
+ |  0.001 | -0.404 |  0.409 |  0.067 | torch.Size([64, 64, 3, 3]) || model.41.weight
+ |  0.015 | -0.802 |  0.773 |  0.277 | torch.Size([64]) || model.41.bias
+ | -0.001 | -0.498 |  0.406 |  0.071 | torch.Size([64, 64, 3, 3]) || model.44.weight
+ |  0.081 | -0.705 |  0.802 |  0.310 | torch.Size([64]) || model.44.bias
+ |  0.000 | -0.023 |  0.030 |  0.006 | torch.Size([1, 64, 3, 3]) || model.47.weight
+ |  0.001 |  0.001 |  0.001 |    nan | torch.Size([1]) || model.47.bias
+
+21-05-07 21:59:47.731 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 21.99dB
+21-05-07 21:59:47.732 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 410.86MSE
+21-05-07 21:59:47.733 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 20.27RMSE
+21-05-07 21:59:47.733 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 730.95BM3D-MSE
+21-05-07 21:59:47.733 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 27.04BM3D-RMSE
+21-05-07 21:59:47.734 : ---1--> IXI380-Guys-0944-T1.nii_plu10.png | 19.49dB - BM3D
+21-05-07 21:59:47.755 : Average PSNR : 21.99dB
+
+21-05-07 21:59:47.755 : Average MSE : 410.86
+
+21-05-07 21:59:47.756 : Average RMSE : 20.27
+
+21-05-07 21:59:47.756 : Average PSNR - BM3D : 19.49dB
+
+21-05-07 21:59:47.756 : Average MSE - BM3D : 730.95
+
+21-05-07 21:59:47.756 : Average RMSE - BM3D: 27.04
+
+21-05-07 21:59:47.756 : End of testing
