@@ -20,9 +20,9 @@ from select_model import define_Model
 
 
 '''
-# --------------------------------------------
-# training code for DnCNN
-# --------------------------------------------
+# --------------------------------------------------------------
+# testing code for DnCNN - apply directly to noisy fetal images
+# --------------------------------------------------------------
 # 
 # Reference:
 @article{zhang2017beyond,
